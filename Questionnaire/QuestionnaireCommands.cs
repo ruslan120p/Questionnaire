@@ -57,7 +57,7 @@ namespace Questionnaire
                         }
                         else
                         {
-                            Console.WriteLine("Неверная параметры команды!");
+                            Console.WriteLine("Неверные параметры команды!");
                         }
                         break;
                     case "-delete":
@@ -67,7 +67,7 @@ namespace Questionnaire
                         }
                         else
                         {
-                            Console.WriteLine("Неверная параметры команды!");
+                            Console.WriteLine("Неверные параметры команды!");
                         }
                         break;
                     case "-list":
@@ -83,7 +83,7 @@ namespace Questionnaire
                         }
                         else
                         {
-                            Console.WriteLine("Неверная параметры команды!");
+                            Console.WriteLine("Неверные параметры команды!");
                         }
                         break;
                     case "-help":
@@ -135,12 +135,13 @@ namespace Questionnaire
         private static void FillQuestion()
         {
             Result validateResult;
+            int goToQuestion = default(int);
             // Поля анкеты
-            string fullName = string.Empty;
-            DateTime dateOfBirth = new DateTime();
-            string favoriteLanguage = string.Empty;
+            string fullName = default(string);
+            DateTime dateOfBirth = default(DateTime);
+            string favoriteLanguage = default(string);
             int programmingExperience = default(int);
-            string phoneNumber = string.Empty;
+            string phoneNumber = default(string);
 
             for (int i = 1; i <= 5; i++)
             {
@@ -149,108 +150,93 @@ namespace Questionnaire
                 {
                     case 1:
                         Console.WriteLine("1. ФИО:");
-                        do
+                        fullName = Console.ReadLine();
+                        // Проверка на ввод команды вместо данных анкеты
+                        if (CheckCommand(fullName, i, out goToQuestion))
                         {
-                            fullName = Console.ReadLine();
-                            // Проверка на ввод команды вместо данных анкеты
-                            if (CheckCommand(fullName, i, out int goToQuestion))
-                            {
-                                i = goToQuestion;
-                                break;
-                            }
-                            validateResult = QuestionnaireValidation.ValidateFullName(fullName);
-                            if (!validateResult.Success)
-                            {
-                                Console.WriteLine(validateResult.Message);
-                            }
+                            i = goToQuestion;
+                            break;
                         }
-                        while (!validateResult.Success);
+                        validateResult = QuestionnaireValidation.ValidateFullName(fullName);
+                        if (!validateResult.Success)
+                        {
+                            Console.WriteLine(validateResult.Message);
+                        }
                         break;
                     case 2:
                         Console.WriteLine("2. Дата рождения (Формат ДД.ММ.ГГГГ):");
-                        do
+                        var command = Console.ReadLine();
+                        // Проверка на ввод команды вместо данных анкеты
+                        if (CheckCommand(command, i, out goToQuestion))
                         {
-                            var command = Console.ReadLine();
-                            // Проверка на ввод команды вместо данных анкеты
-                            if (CheckCommand(command, i, out int goToQuestion))
-                            {
-                                i = goToQuestion;
-                                break;
-                            }
-                            validateResult = QuestionnaireValidation.ValidateDateOfBirth(command);
-                            if (!validateResult.Success)
-                            {
-                                Console.WriteLine(validateResult.Message);
-                            }
-                            else
-                            {
-                                dateOfBirth = DateTime.Parse(command);
-                            }
+                            i = goToQuestion;
+                            break;
                         }
-                        while (!validateResult.Success);
+                        validateResult = QuestionnaireValidation.ValidateDateOfBirth(command);
+                        if (!validateResult.Success)
+                        {
+                            Console.WriteLine(validateResult.Message);
+                        }
+                        else
+                        {
+                            dateOfBirth = DateTime.Parse(command);
+                        }
                         break;
                     case 3:
                         Console.WriteLine("3. Любимый язык программирования (PHP, JavaScript, C, C++, Java, C#, Python, Ruby):");
-                        do
+                        favoriteLanguage = Console.ReadLine();
+                        // Проверка на ввод команды вместо данных анкеты
+                        if (CheckCommand(favoriteLanguage, i, out goToQuestion))
                         {
-                            favoriteLanguage = Console.ReadLine();
-                            // Проверка на ввод команды вместо данных анкеты
-                            if (CheckCommand(favoriteLanguage, i, out int goToQuestion))
-                            {
-                                i = goToQuestion;
-                                break;
-                            }
-                            validateResult = QuestionnaireValidation.ValidateFavoriteLanguage(favoriteLanguage);
-                            if (!validateResult.Success)
-                            {
-                                Console.WriteLine(validateResult.Message);
-                            }
+                            i = goToQuestion;
+                            break;
                         }
-                        while (!validateResult.Success);
+                        validateResult = QuestionnaireValidation.ValidateFavoriteLanguage(favoriteLanguage);
+                        if (!validateResult.Success)
+                        {
+                            Console.WriteLine(validateResult.Message);
+                        }
                         break;
                     case 4:
                         Console.WriteLine("4. Опыт программирования на указанном языке (Полных лет):");
                         string experience;
-                        do
+                        experience = Console.ReadLine();
+                        // Проверка на ввод команды вместо данных анкеты
+                        if (CheckCommand(experience, i, out goToQuestion))
                         {
-                            experience = Console.ReadLine();
-                            // Проверка на ввод команды вместо данных анкеты
-                            if (CheckCommand(experience, i, out int goToQuestion))
-                            {
-                                i = goToQuestion;
-                                break;
-                            }
-                            validateResult = QuestionnaireValidation.ValidateProgrammingExperience(experience);
-                            if (!validateResult.Success)
-                            {
-                                Console.WriteLine(validateResult.Message);
-                            }
-                            else
-                            {
-                                programmingExperience = Convert.ToInt32(experience);
-                            }
+                            i = goToQuestion;
+                            break;
                         }
-                        while (!validateResult.Success);
+                        validateResult = QuestionnaireValidation.ValidateProgrammingExperience(experience);
+                        if (!validateResult.Success)
+                        {
+                            Console.WriteLine(validateResult.Message);
+                        }
+                        else
+                        {
+                            programmingExperience = Convert.ToInt32(experience);
+                        }
                         break;
                     case 5:
                         Console.WriteLine("5. Мобильный телефон:");
-                        do
+                        phoneNumber = Console.ReadLine();
+                        // Проверка на ввод команды вместо данных анкеты
+                        if (CheckCommand(phoneNumber, i, out goToQuestion))
                         {
-                            phoneNumber = Console.ReadLine();
-                            // Проверка на ввод команды вместо данных анкеты
-                            if (CheckCommand(phoneNumber, i, out int goToQuestion))
-                            {
-                                i = goToQuestion;
-                                break;
-                            }
-                            validateResult = QuestionnaireValidation.ValidatephoneNumber(phoneNumber);
-                            if (!validateResult.Success)
-                            {
-                                Console.WriteLine(validateResult.Message);
-                            }
+                            i = goToQuestion;
+                            break;
                         }
-                        while (!validateResult.Success);
+                        validateResult = QuestionnaireValidation.ValidatephoneNumber(phoneNumber);
+                        if (!validateResult.Success)
+                        {
+                            Console.WriteLine(validateResult.Message);
+                        }
                         break;
+                }
+                // Если ввели некорректные данные возвращаемся к этому же вопросу
+                if(!validateResult.Success)
+                {
+                    i--;
                 }
             }
             // Создание анкеты
@@ -290,11 +276,11 @@ namespace Questionnaire
         /// </summary>
         public static void Statistics()
         {
-            Console.WriteLine("Статистика анкет:");
-            if(!Directory.Exists(directory))
+            if (!DirectoryExist())
             {
                 return;
             }
+            Console.WriteLine("Статистика анкет:");
             var questionnaires = Directory.GetFiles(directory).ToDictionary(k => Path.GetFileName(k), v => File.ReadAllLines(v));
             var years = new List<int>();
             var favoriteLanguage = QuestionnaireValidation.FavoriteLanguages.ToDictionary(k => k.ToUpper(), v => 0);
@@ -335,7 +321,7 @@ namespace Questionnaire
                 return;
             }
             Directory.CreateDirectory(directory);
-            var path = $"{directory}{questionnaire.fullName}.txt";
+            var path = $"{directory}{questionnaire.FullName}.txt";
             File.WriteAllText(path, questionnaire.GetTextOfQuestionnaire());
             Console.WriteLine($"Файл {path} был Сохранен!");
         }
@@ -378,6 +364,10 @@ namespace Questionnaire
         /// </summary>
         public static void List()
         {
+            if (!DirectoryExist())
+            {
+                return;
+            }
             Console.WriteLine("Сохраненные анкеты:");
             foreach (var file in Directory.GetFiles(directory))
             {
@@ -390,6 +380,10 @@ namespace Questionnaire
         /// </summary>
         public static void ListToday()
         {
+            if (!DirectoryExist())
+            {
+                return;
+            }
             var directoryInfo = new DirectoryInfo(directory);
             var files = directoryInfo.GetFiles().Where(f => f.CreationTime >= DateTime.Today).Select(f => f.Name);
             Console.WriteLine("Сохраненные анкеты за сегодня:");
@@ -425,22 +419,22 @@ namespace Questionnaire
         /// </summary>
         public static void Help()
         {
-            var sb = new StringBuilder();
-            sb.AppendLine("Доступные команды:\n");
-            sb.AppendLine("-new_profile - Заполнить новую анкету");
-            sb.AppendLine("-statistics - Показать статистику всех заполненных анкет");
-            sb.AppendLine("-save - Сохранить заполненную анкету");
-            sb.AppendLine("-goto_question <Номер вопроса> -Вернуться к указанному вопросу (Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)");
-            sb.AppendLine("-goto_prev_question - Вернуться к предыдущему вопросу(Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)");
-            sb.AppendLine("-restart_profile - Заполнить анкету заново(Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)");
-            sb.AppendLine("-find <Имя файла анкеты> -Найти анкету и показать данные анкеты в консоль");
-            sb.AppendLine("-delete <Имя файла анкеты> -Удалить указанную анкету");
-            sb.AppendLine("-list - Показать список названий файлов всех сохранённых анкет");
-            sb.AppendLine("-list_today - Показать список названий файлов всех сохранённых анкет, созданных сегодня");
-            sb.AppendLine("-zip <Имя файла анкеты> <Путь для сохранения архива> -Запаковать указанную анкету в архив и сохранить архив по указанному пути");
-            sb.AppendLine("-help - Показать список доступных команд с описанием");
-            sb.AppendLine("-exit - Выйти из приложения");
-            Console.WriteLine(sb.ToString());
+            var message = $@"Доступные команды:
+-new_profile - Заполнить новую анкету
+-statistics - Показать статистику всех заполненных анкет
+-save - Сохранить заполненную анкету
+-goto_question <Номер вопроса> -Вернуться к указанному вопросу (Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)
+-goto_prev_question - Вернуться к предыдущему вопросу(Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)
+-restart_profile - Заполнить анкету заново(Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)
+-find <Имя файла анкеты> -Найти анкету и показать данные анкеты в консоль
+-delete <Имя файла анкеты> -Удалить указанную анкету
+-list - Показать список названий файлов всех сохранённых анкет
+-list_today - Показать список названий файлов всех сохранённых анкет, созданных сегодня
+-zip <Имя файла анкеты> <Путь для сохранения архива> -Запаковать указанную анкету в архив и сохранить архив по указанному пути
+-help - Показать список доступных команд с описанием
+-exit - Выйти из приложения
+";
+            Console.WriteLine(message);
         }
 
         /// <summary>
@@ -449,6 +443,19 @@ namespace Questionnaire
         public static void Exit()
         {
             Environment.Exit(0);
+        }
+
+        private static bool DirectoryExist()
+        {
+            if (Directory.Exists(directory))
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Не созданно ни одной анкеты!");
+                return false;
+            }
         }
 
         /// <summary>

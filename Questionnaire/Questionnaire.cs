@@ -7,27 +7,27 @@ namespace Questionnaire
         /// <summary>
         /// ФИО
         /// </summary>
-        public string fullName { get; set; }
+        public string FullName { get; set; }
 
         /// <summary>
         /// Дата рождения
         /// </summary>
-        public DateTime dateOfBirth { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
 
         /// <summary>
         /// Любимый язык программирования
         /// </summary>
-        public string favoriteLanguage { get; set; }
+        public string FavoriteLanguage { get; set; }
 
         /// <summary>
         /// Опыт программирования на указанном языке
         /// </summary>
-        public int programmingExperience { get; set; }
+        public int ProgrammingExperience { get; set; }
 
         /// <summary>
         /// Мобильный телефон
         /// </summary>
-        public string phoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Дата заполнения анкеты
@@ -36,11 +36,11 @@ namespace Questionnaire
 
         public Questionnaire(string fullName, DateTime dateOfBirth, string favoriteLanguage, int programmingExperience, string phoneNumber)
         {
-            this.fullName = fullName;
-            this.dateOfBirth = dateOfBirth;
-            this.favoriteLanguage = favoriteLanguage;
-            this.programmingExperience = programmingExperience;
-            this.phoneNumber = phoneNumber;
+            this.FullName = fullName;
+            this.DateOfBirth = dateOfBirth;
+            this.FavoriteLanguage = favoriteLanguage;
+            this.ProgrammingExperience = programmingExperience;
+            this.PhoneNumber = phoneNumber;
             DateFilling = DateTime.Now;
         }
 
@@ -50,11 +50,11 @@ namespace Questionnaire
         public string GetTextOfQuestionnaire()
         {
             return
-                $@"1. ФИО: {fullName}
-2. Дата рождения: {dateOfBirth.ToShortDateString()}
-3. Любимый язык программирования: {favoriteLanguage}
-4. Опыт программирования на указанном языке: {programmingExperience}
-5. Мобильный телефон: {phoneNumber}
+                $@"1. ФИО: {FullName}
+2. Дата рождения: {DateOfBirth.ToShortDateString()}
+3. Любимый язык программирования: {FavoriteLanguage}
+4. Опыт программирования на указанном языке: {ProgrammingExperience}
+5. Мобильный телефон: {PhoneNumber}
 
 Анкета заполнена: {DateFilling.ToShortDateString()}";
         }
