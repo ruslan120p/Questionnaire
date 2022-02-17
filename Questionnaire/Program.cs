@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            QuestionnaireCommands.StartReadCommands();
+            var questionnaireProcces = new QuestionnaireCommands();
+            questionnaireProcces.StartReadCommands();
         }
     }
 }

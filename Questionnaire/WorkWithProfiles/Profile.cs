@@ -2,7 +2,10 @@
 
 namespace Questionnaire
 {
-    internal class Questionnaire
+    /// <summary>
+    /// Анкета
+    /// </summary>
+    internal class Profile
     {
         /// <summary>
         /// ФИО
@@ -34,20 +37,20 @@ namespace Questionnaire
         /// </summary>
         public DateTime DateFilling { get; private set; }
 
-        public Questionnaire(string fullName, DateTime dateOfBirth, string favoriteLanguage, int programmingExperience, string phoneNumber)
+        public Profile(string fullName, DateTime dateOfBirth, string favoriteLanguage, int programmingExperience, string phoneNumber)
         {
-            this.FullName = fullName;
-            this.DateOfBirth = dateOfBirth;
-            this.FavoriteLanguage = favoriteLanguage;
-            this.ProgrammingExperience = programmingExperience;
-            this.PhoneNumber = phoneNumber;
+            FullName = fullName;
+            DateOfBirth = dateOfBirth;
+            FavoriteLanguage = favoriteLanguage;
+            ProgrammingExperience = programmingExperience;
+            PhoneNumber = phoneNumber;
             DateFilling = DateTime.Now;
         }
 
         /// <summary>
         /// Получить данные анкеты в текством представлении
         /// </summary>
-        public string GetTextOfQuestionnaire()
+        public string GetTextOfProfile()
         {
             return
                 $@"1. ФИО: {FullName}

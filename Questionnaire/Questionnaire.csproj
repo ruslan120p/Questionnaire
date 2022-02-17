@@ -43,9 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WorkWithProfiles\IProfileParser.cs" />
+    <Compile Include="WorkWithProfiles\IProfileSaver.cs" />
+    <Compile Include="WorkWithProfiles\ProfileParser.cs" />
+    <Compile Include="QuestionValidation.cs" />
+    <Compile Include="WorkWithProfiles\ProfileSaver.cs" />
+    <Compile Include="WorkWithProfiles\ZipCompress.cs" />
+    <Compile Include="WorkWithProfiles\ICompress.cs" />
+    <Compile Include="WorkWithProfiles\IPrint.cs" />
+    <Compile Include="WorkWithProfiles\PrintToConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Questionnaire.cs" />
+    <Compile Include="WorkWithProfiles\Profile.cs" />
     <Compile Include="QuestionnaireCommands.cs" />
     <Compile Include="Result.cs" />
   </ItemGroup>
